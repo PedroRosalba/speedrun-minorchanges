@@ -28,7 +28,7 @@ const IpfsUpload: NextPage = () => {
       notification.success("Uploaded to IPFS");
 
       setUploadedIpfsPath(uploadedItem.path);
-      router.push(`/myNFTs/${uploadedItem.path}`);
+      // router.push(`/myNFTs/${uploadedItem.path}`);
     } catch (error) {
       notification.remove(notificationId);
       notification.error("Error uploading to IPFS");
