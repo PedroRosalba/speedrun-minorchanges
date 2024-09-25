@@ -5,10 +5,12 @@ import type { NextPage } from "next";
 import { notification } from "~~/utils/scaffold-stark/notification";
 import { addToIPFS } from "~~/utils/simpleNFT/ipfs-fetch";
 import nftsMetadata from "~~/utils/simpleNFT/nftsMetadata";
+import { useRouter } from "next/navigation";
 
 const LazyReactJson = lazy(() => import("react-json-view"));
 
 const IpfsUpload: NextPage = () => {
+  const router = useRouter();
   const [yourJSON, setYourJSON] = useState<object>(nftsMetadata[0]);
   const [loading, setLoading] = useState(false);
   const [uploadedIpfsPath, setUploadedIpfsPath] = useState("");
@@ -26,6 +28,7 @@ const IpfsUpload: NextPage = () => {
       notification.success("Uploaded to IPFS");
 
       setUploadedIpfsPath(uploadedItem.path);
+      router.push(`/myNFTs/${uploadedItem.path}`);
     } catch (error) {
       notification.remove(notificationId);
       notification.error("Error uploading to IPFS");
